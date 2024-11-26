@@ -1,7 +1,5 @@
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+  box-sizing: border-box !important;
 }
 
 .text-primary {
@@ -26,10 +24,25 @@ body {
 }
 
 .gray-text {
-  color: rgba(236, 171, 106, 0.6);
+  color: rgba(236, 171, 106, 0.6) !important;
+}
+
+.link {
+  color: #ecab6a;
+  text-decoration: none;
+  margin-bottom: 0;
+
+  transition: all 0.1s ease-in;
+}
+
+.link:hover {
+  color: #8e6740;
+}
+
+.card {
+  transition: all 0.25s ease-in-out;
 }
 
 .card:hover {
   scale: 102%;
-  transition: all 0.3s ease-in-out;
 }
