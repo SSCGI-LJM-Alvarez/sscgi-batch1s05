@@ -13,10 +13,183 @@
       crossorigin="anonymous"
     />
 
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Quicksand:wght@300..700&display=swap"
+      rel="stylesheet"
+    />
+
     <!-- Custom CSS -->
     <link rel="stylesheet" href="index.css" />
   </head>
   <body>
+    <!-- #region Navbar -->
+    <nav class="navbar navbar-expand-xxl navbar-dark bg-dark">
+      <div class="container mx-auto py-3">
+        <a class="navbar-brand d-flex" href="#">PasaLoad</a>
+        <button
+          class="navbar-toggler d-lg-none"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#collapsibleNavId"
+          aria-controls="collapsibleNavId"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div
+          class="collapse navbar-collapse justify-content-end"
+          id="collapsibleNavId"
+        >
+          <!-- Modal trigger button -->
+          <button
+            type="button"
+            class="btn btn-dark mt-2"
+            data-bs-toggle="modal"
+            data-bs-target="#modalReload"
+          >
+            Add Load
+          </button>
+        </div>
+      </div>
+    </nav>
+    <!-- #endregion Navbar -->
+
+    <!-- #region Modal ReLoad Balance -->
+    <div
+      class="modal fade"
+      id="modalReload"
+      tabindex="-1"
+      data-bs-backdrop="static"
+      data-bs-keyboard="false"
+      role="dialog"
+      aria-labelledby="modalTitleId"
+      aria-hidden="true"
+    >
+      <div
+        class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm mx-auto"
+        role="document"
+      >
+        <form onsubmit="addLoad(event)" class="modal-content">
+          <div class="modal-header justify-content-between px-3 py-2">
+            <h5 class="modal-title" id="modalTitleId">Add Load Here!</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body px-3 py-2">
+            <div
+              class="d-flex flex-row justify-content-center align-items-center gap-2"
+            >
+              <label for="add_load" class="form-label fw-semibold"
+                >Amount:</label
+              >
+              <input
+                type="text"
+                pattern="[0-9]*"
+                inputmode="numeric"
+                oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+                class="form-control px-2 py-1"
+                name="add_load"
+                id="add_load"
+                placeholder="100"
+                minlength="1"
+                required
+              />
+            </div>
+          </div>
+          <div class="modal-footer gap-2 px-3 py-2">
+            <button
+              type="button"
+              class="btn btn-secondary px-2 py-1"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+            <button type="submit" class="btn btn-primary px-2 py-1">
+              Add Load
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!-- #endregion Modal ReLoad Balance -->
+
+    <!-- #region PasaLoad -->
+    <main class="container mx-auto rounded-3 bg-color text-white my-5 p-4">
+      <div class="row">
+        <form onsubmit="diminishLoad(event)" class="col text-center">
+          <p class="display-2 fw-bolder mb-4">PasaLoad</p>
+          <p class="lead fw-bold">Available Load:</p>
+          <input
+            type="text"
+            id="current_load"
+            value="0"
+            class="bg-transparent border-0 text-center lead fw-semibold mb-3"
+            readonly
+          />
+
+          <div
+            class="d-flex flex-row justify-content-center align-items-center gap-2 mb-1"
+          >
+            <label for="mobile_number" class="form-label fw-semibold"
+              >Mobile Number:</label
+            >
+            <input
+              type="text"
+              pattern="[0-9]*"
+              inputmode="numeric"
+              oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+              class="form-control w-25 px-2 py-1"
+              name="mobile_number"
+              id="mobile_number"
+              placeholder="09#########"
+              minlength="11"
+              maxlength="11"
+              required
+            />
+          </div>
+          <div
+            class="d-flex flex-row justify-content-center align-items-center gap-2 mb-4"
+          >
+            <label for="sub_load" class="form-label fw-semibold">Amount:</label>
+            <input
+              type="text"
+              pattern="[0-9]*"
+              inputmode="numeric"
+              oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+              class="form-control sub_load w-25 px-2 py-1"
+              name="sub_load"
+              id="sub_load"
+              minlength="1"
+              placeholder="100"
+              required
+            />
+          </div>
+          <button type="submit" class="btn btn-dark px-2 py-1">PasaLoad</button>
+        </form>
+      </div>
+    </main>
+    <!-- #endregion PasaLoad -->
+
+    <!-- #region History -->
+    <section class="container mx-auto rounded-3 bg-color text-white mb-5 p-4">
+      <div class="row">
+        <div class="col">
+          <p class="display-6 fw-bolder text-center mb-4">History</p>
+
+          <div id="history_load" class="table-responsive"></div>
+        </div>
+      </div>
+    </section>
+    <!-- #endregion History -->
+
     <!-- Bootstrap JS -->
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
